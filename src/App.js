@@ -1,4 +1,5 @@
 import { Header } from "./components/header";
+import { Opportunities } from "./components/opportunities";
 
 import "./App.css";
 
@@ -15,6 +16,7 @@ export const App = () => {
           need—Spring is modular by design.
         </p>
       </div>
+      <Opportunities />
     </div>
   );
 };

@@ -1,0 +1,28 @@
+.opportunities_wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #ebf2f2;
+}
+
+.input {
+  max-width: 500px;
+  width: 100%;
+  padding: 15px 10px;
+  margin: 50px auto 0;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.3s;
+  font-size: 20px;
+}
+
+.input:hover,
+.input:focus {
+  border: 1px solid #000;
+}
+
+.error_title {
+  margin-top: 15px;
+  text-align: center;
+}
