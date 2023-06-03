@@ -1,0 +1,43 @@
+header {
+  height: 75px;
+  padding: 10px 65px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ebf2f2;
+}
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_logo img {
+  width: 300px;
+}
+
+.header_navigation-item::after {
+  content: url(../../assets/icons/down_arrow.svg);
+  top: 0;
+  left: 100px;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+  header {
+    padding: 10px 30px;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 999px) {
+  header {
+    padding: 10px 28px;
+  }
+}
+
+@media (max-width: 799px) {
+  header {
+    padding: 10px 15px;
+  }
+}
