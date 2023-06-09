@@ -3,35 +3,3 @@
   font-size: 36px;
   margin: 100px 0 50px;
 }
-
-.form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.form_input {
-  max-width: 500px;
-  width: 100%;
-  padding: 15px 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  outline: none;
-  font-size: 20px;
-}
-
-.form_button {
-  max-width: 200px;
-  width: 100%;
-  padding: 10px;
-  background: transparent;
-  border-radius: 5px;
-  outline: none;
-  transition: 0.3;
-}
-
-.form_button:hover {
-  background: #e5e1e1;
-}

@@ -1,33 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { LoginForm } from "../../components/loginForm/loginForm";
+import { LOGIN_SUCCESS } from "../../store/actions/loginActions";
+import { ROUTE_NAMES } from "../../routes/routeNames";
 
 import styles from "./style.module.css";
 
 export const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formValues, setFormValues] = useState({ username: "", password: "" });
+
+  const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.login);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate(ROUTE_NAMES.HOME);
+    }
+  }, [isAuth]);
+
+  const handleChange = useCallback(({ target }) => {
+    const { value, name } = target;
+
+    setFormValues((state) => ({
+      ...state,
+      [name]: value,
+    }));
+  }, []);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (formValues.username === "admin" && formValues.password === "1234") {
+      dispatch(LOGIN_SUCCESS(formValues));
+    } else {
+      alert("Login failed");
+    }
+  };
 
   return (
     <>
       <h1 className={styles.login_title}>Login Page</h1>
-      <form className={styles.form}>
-        <input
-          className={styles.form_input}
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          className={styles.form_input}
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className={styles.form_button} type="submit">
-          Submit
-        </button>
-      </form>
+      <LoginForm
+        handleChange={handleChange}
+        formValues={formValues}
+        onSubmit={onSubmit}
+      />
     </>
   );
 };
