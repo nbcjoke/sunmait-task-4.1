@@ -10,7 +10,6 @@ const initialState = {
 export const loginReducer = handleActions(
   {
     [actions.LOGIN_SUCCESS]: (state, { payload: userData }) => {
-      console.log(userData);
       return {
         ...state,
         isAuth: true,
