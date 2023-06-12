@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { LoginForm } from "./components";
 
-import { LOGIN_SUCCESS } from "../../store/actions/loginActions";
 import { ROUTE_NAMES } from "../../routes/routeNames";
 
 import styles from "./style.module.css";
@@ -12,16 +11,13 @@ import styles from "./style.module.css";
 export const Login = () => {
   const [formValues, setFormValues] = useState({ username: "", password: "" });
 
-  const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.login);
-
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuth) {
-      navigate(ROUTE_NAMES.HOME);
-    }
-  }, [isAuth]);
+  //   useEffect(() => {
+  //     if (isAuth) {
+  //       navigate(ROUTE_NAMES.HOME);
+  //     }
+  //   }, [isAuth]);
 
   const handleChange = useCallback(({ target }) => {
     const { value, name } = target;
@@ -35,7 +31,6 @@ export const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (formValues.username === "admin" && formValues.password === "1234") {
-      dispatch(LOGIN_SUCCESS(formValues));
     } else {
       alert("Login failed");
     }
