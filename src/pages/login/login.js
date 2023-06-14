@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { LoginForm } from "./components";
+import { connect } from "../../custom-redux";
+import { loginSuccess } from "../../store/reducers/loginReducer";
 
 import { ROUTE_NAMES } from "../../routes/routeNames";
 
 import styles from "./style.module.css";
 
-export const Login = () => {
+export const Login = ({ value, loginSuccess }) => {
   const [formValues, setFormValues] = useState({ username: "", password: "" });
 
   const navigate = useNavigate();
@@ -19,6 +21,8 @@ export const Login = () => {
   //     }
   //   }, [isAuth]);
 
+  console.log(loginSuccess);
+  console.log(value);
   const handleChange = useCallback(({ target }) => {
     const { value, name } = target;
 
@@ -31,6 +35,7 @@ export const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (formValues.username === "admin" && formValues.password === "1234") {
+      loginSuccess();
     } else {
       alert("Login failed");
     }

@@ -5,8 +5,9 @@ const initialState = {
   isAuth: false,
 };
 
-export const loginReducer = (state = 0, action) => {
+export const loginReducer = (state = initialState, action) => {
   if (action.type === "LOGIN_SUCCESS") {
+    console.log(state, action);
     return {
       ...state,
       isAuth: true,
