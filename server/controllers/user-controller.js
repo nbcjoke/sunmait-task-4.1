@@ -5,15 +5,15 @@ class UserController {
     try {
       const id = uuid();
       const { username, password } = req.body;
-      let user = {};
-      if (username === "admin" && password === "1234") {
-        user = {
-          username,
-          password,
-          id,
-        };
+      if (username !== "admin" || password !== "1234") {
+        return res.status(400).send({ message: "User not found" });
       }
-      return res.json(user);
+
+      return res.json({
+        username,
+        password,
+        id,
+      });
     } catch (err) {
       next(err);
     }

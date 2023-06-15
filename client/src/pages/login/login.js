@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { LoginForm } from "./components";
-
-import { LOGIN_SUCCESS } from "../../store/actions/loginActions";
+import { login } from "../../store/actionCreators/login";
 import { ROUTE_NAMES } from "../../routes/routeNames";
 
 import styles from "./style.module.css";
@@ -34,11 +33,12 @@ export const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (formValues.username === "admin" && formValues.password === "1234") {
-      dispatch(LOGIN_SUCCESS(formValues));
-    } else {
-      alert("Login failed");
-    }
+    // if (formValues.username === "admin" && formValues.password === "1234") {
+    //   dispatch(LOGIN_SUCCESS(formValues));
+    // } else {
+    //   alert("Login failed");
+    // }
+    dispatch(login(formValues));
   };
 
   return (
