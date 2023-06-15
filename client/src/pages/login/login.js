@@ -33,11 +33,6 @@ export const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // if (formValues.username === "admin" && formValues.password === "1234") {
-    //   dispatch(LOGIN_SUCCESS(formValues));
-    // } else {
-    //   alert("Login failed");
-    // }
     dispatch(login(formValues));
   };
 

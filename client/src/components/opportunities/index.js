@@ -1,29 +1,21 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { getOpportunities } from "../../store/actionCreators/opportunities";
 import { useDebounce } from "../../hooks/useDebounce";
-import { opportunities } from "../../mocks/opportunities";
 import { OpportunityCard } from "./opportunityCard";
 
 import styles from "./style.module.css";
 
 export const Opportunities = () => {
   const [value, setValue] = useState("");
-  const [opportunityItems, setOpportunityItems] = useState(opportunities);
   const debouncedValue = useDebounce(value, 300);
+  const dispatch = useDispatch();
+  const { opportunities } = useSelector((state) => state.opportunities);
 
+  console.log(opportunities);
   useEffect(() => {
-    const filtered = opportunities.filter((item) => {
-      return (
-        item.title
-          .toLocaleLowerCase()
-          .includes(debouncedValue.toLocaleLowerCase()) ||
-        item.description
-          .toLocaleLowerCase()
-          .includes(debouncedValue.toLocaleLowerCase())
-      );
-    });
-
-    setOpportunityItems(filtered);
+    dispatch(getOpportunities(debouncedValue));
   }, [debouncedValue]);
 
   return (
@@ -36,10 +28,10 @@ export const Opportunities = () => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      {!opportunityItems.length ? (
+      {!opportunities?.length ? (
         <h2 className={styles.error_title}>No results</h2>
       ) : (
-        <OpportunityCard opportunityItems={opportunityItems} />
+        <OpportunityCard opportunities={opportunities} />
       )}
     </div>
   );

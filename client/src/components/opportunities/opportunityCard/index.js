@@ -1,9 +1,9 @@
 import styles from "./style.module.css";
 
-export const OpportunityCard = ({ opportunityItems }) => {
+export const OpportunityCard = ({ opportunities }) => {
   return (
     <div className={styles.opportunities_container}>
-      {opportunityItems.map((opportunityItem) => {
+      {opportunities.map((opportunityItem) => {
         return (
           <div className={styles.opportunity_item} key={opportunityItem.id}>
             <div className={styles["opportunity_item-image"]}>
