@@ -12,19 +12,19 @@ const initialState = {
 export const loginSlice = createSlice({
   name: "login",
   initialState,
-  extraReducers: {
-    [login.pending.type]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(login.pending, (state) => {
       state.isLoading = true;
-    },
-    [login.fulfilled.type]: (state, { payload }) => {
+    });
+    builder.addCase(login.fulfilled, (state, { payload }) => {
       state.isAuth = true;
       state.isLoading = false;
       state.userData = payload;
-    },
-    [login.rejected.type]: (state, { payload }) => {
+    });
+    builder.addCase(login.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
-    },
+    });
   },
 });
 
