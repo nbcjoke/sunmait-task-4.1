@@ -1,15 +1,17 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
 import api from "../../api/config";
 
-import { opportunitiesSlice } from "../reducers/opportunitiesReducer";
-
-export const getOpportunities = (search) => async (dispatch) => {
-  try {
-    dispatch(opportunitiesSlice.actions.opportunitiesRequest());
-    const response = await api.get("/opportunities", {
-      params: { search },
-    });
-    dispatch(opportunitiesSlice.actions.opportunitiesSuccess(response.data));
-  } catch (err) {
-    dispatch(opportunitiesSlice.actions.opportunitiesFail(err.message));
+export const getOpportunities = createAsyncThunk(
+  "getOpportunities",
+  async (search, thunkAPI) => {
+    try {
+      const response = await api.get("/opportunities", {
+        params: { search },
+      });
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue("Wrong credentials");
+    }
   }
-};
+);

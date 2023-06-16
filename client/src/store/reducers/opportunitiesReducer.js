@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { getOpportunities } from "../actionCreators/opportunities";
+
 const initialState = {
   opportunities: [],
   isLoading: false,
@@ -9,15 +11,15 @@ const initialState = {
 export const opportunitiesSlice = createSlice({
   name: "opportunities",
   initialState,
-  reducers: {
-    opportunitiesRequest(state) {
+  extraReducers: {
+    [getOpportunities.pending.type]: (state) => {
       state.isLoading = true;
     },
-    opportunitiesSuccess(state, { payload }) {
+    [getOpportunities.fulfilled.type]: (state, { payload }) => {
       state.isLoading = false;
       state.opportunities = payload;
     },
-    opportunitiesFail(state, { payload }) {
+    [getOpportunities.rejected.type]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },

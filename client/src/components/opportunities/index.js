@@ -13,7 +13,6 @@ export const Opportunities = () => {
   const dispatch = useDispatch();
   const { opportunities } = useSelector((state) => state.opportunities);
 
-  console.log(opportunities);
   useEffect(() => {
     dispatch(getOpportunities(debouncedValue));
   }, [debouncedValue]);
