@@ -6,10 +6,14 @@ const ApiError = require("../exceptions/api-error");
 
 class UserService {
   async registration(username, password, firstname, lastname, age) {
-    const candidate = await UserModel.findOne({ email });
+    const candidate = await UserModel.findOne({
+      where: {
+        username,
+      },
+    });
     if (candidate) {
       throw ApiError.BadRequestError(
-        `Пользователь с почтовым адресом ${email} уже существует`
+        `Пользователь с таким именем ${username} уже существует`
       );
     }
     const hashPassword = await bcrypt.hash(password, 3);
@@ -41,10 +45,6 @@ class UserService {
     }
 
     const tokens = tokenService.generateToken({ ...user });
-
-    await tokenService.saveToken(user.id, tokens.refreshToken);
-
-    await user.updateOne({ lastOnline: new Date() });
 
     return {
       ...tokens,

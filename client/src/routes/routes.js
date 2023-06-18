@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Home, Login } from "../pages";
+import { Home, Login, Signup } from "../pages";
 
 import { PrivateRoute } from "./privateRoute";
 import { ROUTE_NAMES } from "./routeNames";
@@ -17,6 +17,7 @@ export const Router = () => {
         }
       />
       <Route path={ROUTE_NAMES.LOGIN} element={<Login />} />
+      <Route path={ROUTE_NAMES.SIGNUP} element={<Signup />} />
     </Routes>
   );
 };
