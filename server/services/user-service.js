@@ -1,9 +1,11 @@
-const UserModel = require("../models/user-model");
+// const UserModel = require("../models/user-model");
+const db = require("../models");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid");
 const tokenService = require("./token-service");
 const ApiError = require("../exceptions/api-error");
 
+const UserModel = db.users;
 class UserService {
   async registration(username, password, firstname, lastname, age) {
     const candidate = await UserModel.findOne({
@@ -35,7 +37,11 @@ class UserService {
   }
 
   async login(username, password) {
-    const user = await UserModel.findOne({ username });
+    const user = await UserModel.findOne({
+      where: {
+        username,
+      },
+    });
     if (!user) {
       throw ApiError.BadRequestError("Пользователь с таким username не найден");
     }

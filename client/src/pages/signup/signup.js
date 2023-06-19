@@ -3,24 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { SignupForm } from "./components/signupForm/signupForm";
-import { login } from "../../store/actionCreators/login";
+import { signup } from "../../store/actionCreators/signup";
 import { ROUTE_NAMES } from "../../routes/routeNames";
 
 import styles from "./style.module.css";
 
 export const Signup = () => {
-  const [formValues, setFormValues] = useState({ username: "", password: "" });
+  const [formValues, setFormValues] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    firstname: "",
+    lastname: "",
+    age: "",
+  });
 
-  //   const dispatch = useDispatch();
-  //   const { isAuth } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.signup);
+  console.log(isAuth);
 
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     if (isAuth) {
-  //       navigate(ROUTE_NAMES.HOME);
-  //     }
-  //   }, [isAuth]);
+  useEffect(() => {
+    if (isAuth) {
+      navigate(ROUTE_NAMES.HOME);
+    }
+  }, [isAuth]);
 
   const handleChange = useCallback(({ target }) => {
     const { value, name } = target;
@@ -33,7 +41,7 @@ export const Signup = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // dispatch(login(formValues));
+    dispatch(signup(formValues));
   };
 
   return (

@@ -1,7 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const sequelize = require("sequelize");
+const errorMiddleware = require("./middlewares/error-middleware");
 const router = require("./router/index");
 
 const PORT = process.env.PORT || 5000;
@@ -16,6 +18,7 @@ app.use(
   })
 );
 app.use("/api", router);
+app.use(errorMiddleware);
 
 const start = async () => {
   try {

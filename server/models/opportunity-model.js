@@ -1,34 +1,26 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    "user",
+  const Opportunity = sequelize.define(
+    "opportunity",
     {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      username: {
+      img: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      password: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      firstname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      lastname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      age: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     },
     { timestamps: true }
   );
-  return User;
+  return Opportunity;
 };

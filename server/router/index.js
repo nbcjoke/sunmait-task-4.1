@@ -8,7 +8,7 @@ const opportunityController = require("../controllers/opportunity-controller");
 
 router.post("/login", userController.login);
 router.post(
-  "/registration",
+  "/signup",
   body("username")
     .isLength({ min: 3 })
     .withMessage("Username must contain at least 3 characters"),

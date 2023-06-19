@@ -32,7 +32,7 @@ describe("login", () => {
     mock.onPost(`${API_URL}/login`).reply(400, "Error");
 
     const dispatch = jest.fn();
-    const thunk = login();
+    const thunk = login({});
 
     await thunk(dispatch);
 
@@ -40,7 +40,6 @@ describe("login", () => {
     expect(calls).toHaveLength(2);
 
     const [start, end] = calls;
-
     expect(start[0].type).toBe("login/pending");
     expect(end[0].type).toBe("login/rejected");
     expect(end[0].meta.rejectedWithValue).toBe(true);

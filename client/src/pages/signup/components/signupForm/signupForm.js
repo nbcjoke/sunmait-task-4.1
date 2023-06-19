@@ -34,9 +34,9 @@ export const SignupForm = ({ formValues, handleChange, onSubmit }) => {
         className={styles.form_input}
         autoComplete="off"
         type="text"
-        name="firsname"
-        placeholder="firsname"
-        value={formValues.firsname}
+        name="firstname"
+        placeholder="firstname"
+        value={formValues.firstname}
         onChange={handleChange}
       />
       <input

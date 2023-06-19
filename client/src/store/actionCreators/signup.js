@@ -4,11 +4,20 @@ import api from "../../api/config";
 
 export const signup = createAsyncThunk(
   "signup",
-  async (formValues, thunkAPI) => {
+  async (
+    { username, password, confirmPassword, firstname, lastname, age },
+    thunkAPI
+  ) => {
     try {
       const response = await api.post("/signup", {
-        formValues,
+        username,
+        password,
+        confirmPassword,
+        firstname,
+        lastname,
+        age,
       });
+      localStorage.setItem("token", response.data.accessToken);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue("Wrong credentials");
