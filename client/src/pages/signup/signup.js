@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { SignupForm } from "./components/signupForm/signupForm";
-import { signup } from "../../store/actionCreators/signup";
+import { signup } from "../../store/actionCreators/auth";
 import { ROUTE_NAMES } from "../../routes/routeNames";
 
 import styles from "./style.module.css";
@@ -19,11 +19,9 @@ export const Signup = () => {
   });
 
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.signup);
-  console.log(isAuth);
+  const { isAuth, errors } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
-
   useEffect(() => {
     if (isAuth) {
       navigate(ROUTE_NAMES.HOME);
@@ -50,6 +48,8 @@ export const Signup = () => {
       <SignupForm
         handleChange={handleChange}
         formValues={formValues}
+        errors={errors}
+        isDisabled={false}
         onSubmit={onSubmit}
       />
     </>

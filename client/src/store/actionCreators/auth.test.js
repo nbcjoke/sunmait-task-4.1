@@ -1,6 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 
-import { login } from "./login";
+import { login } from "./auth";
 import api, { API_URL } from "../../api/config";
 
 describe("login", () => {

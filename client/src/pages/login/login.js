@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { LoginForm } from "./components";
-import { login } from "../../store/actionCreators/login";
+import { login } from "../../store/actionCreators/auth";
 import { ROUTE_NAMES } from "../../routes/routeNames";
 
 import styles from "./style.module.css";
@@ -12,7 +12,7 @@ export const Login = () => {
   const [formValues, setFormValues] = useState({ username: "", password: "" });
 
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.login);
+  const { isAuth } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
 

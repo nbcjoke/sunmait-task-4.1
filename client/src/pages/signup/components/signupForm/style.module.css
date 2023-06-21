@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
 }
 
 .form_input {
@@ -28,4 +28,8 @@
 
 .form_button:hover {
   background: #e5e1e1;
+}
+
+.errors {
+  color: red;
 }

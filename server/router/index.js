@@ -13,9 +13,16 @@ router.post(
     .isLength({ min: 3 })
     .withMessage("Username must contain at least 3 characters"),
   body("password")
-    .isLength({ min: 4 })
-    .withMessage("Password must at least contain 1 number and 1 letter"),
-  body("repeatPassword")
+    // .isStrongPassword({
+    //   minLength: 4,
+    //   minLetters: 1,
+    //   minNumbers: 1,
+    // })
+    .matches(/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{4,}$/, "i")
+    .withMessage(
+      "Password must contain at least 1 number and 1 letter and must be over 4 characters"
+    ),
+  body("confirmPassword")
     .custom((value, { req }) => {
       return value === req.body.password;
     })
@@ -26,9 +33,10 @@ router.post(
   body("lastname")
     .isLength({ min: 3 })
     .withMessage("Username must contain at least 3 characters"),
-  body("age").isLength({ min: 1, max: 28 }).withMessage("Age must be over 0"),
+  body("age").isInt({ min: 1 }).withMessage("Age must be over 0"),
   userController.registration
 );
+router.get("/refresh", userController.refresh);
 
 router.get(
   "/opportunities",

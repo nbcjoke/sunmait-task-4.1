@@ -1,11 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import loginReducer from "./loginReducer";
 import opportunitiesReducer from "./opportunitiesReducer";
-import signupReducer from "./signupReducer";
+import authReducer from "./authReducer";
 
 export const rootReducer = combineReducers({
-  login: loginReducer,
+  auth: authReducer,
   opportunities: opportunitiesReducer,
-  signup: signupReducer,
 });

@@ -5,15 +5,13 @@ const userService = require("../services/user-service");
 
 class UserController {
   async registration(req, res, next) {
-    // console.log(req.body);
     try {
-      // const errors = validationResult(req);
-      // console.log(errors);
-      // if (!errors.isEmpty()) {
-      //   return next(
-      //     ApiError.badRequest("Ошибка при валидации", errors.array())
-      //   );
-      // }
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return next(
+          ApiError.BadRequestError("Ошибка при валидации", errors.array())
+        );
+      }
       const { username, password, firstname, lastname, age } = req.body;
       const userData = await userService.registration(
         username,
@@ -28,7 +26,6 @@ class UserController {
       });
       return res.json(userData);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
@@ -37,6 +34,20 @@ class UserController {
     try {
       const { username, password } = req.body;
       const userData = await userService.login(username, password);
+      res.cookie("refreshToken", userData.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
+      return res.json(userData);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async refresh(req, res, next) {
+    try {
+      const { refreshToken } = req.cookies;
+      const userData = await userService.refresh(refreshToken);
       res.cookie("refreshToken", userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,

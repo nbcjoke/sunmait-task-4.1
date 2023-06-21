@@ -1,7 +1,5 @@
-// const UserModel = require("../models/user-model");
 const db = require("../models");
 const bcrypt = require("bcrypt");
-const uuid = require("uuid");
 const tokenService = require("./token-service");
 const ApiError = require("../exceptions/api-error");
 
@@ -49,6 +47,29 @@ class UserService {
     if (!isPassEquals) {
       throw ApiError.BadRequestError("Неверный пароль");
     }
+
+    const tokens = tokenService.generateToken({ ...user });
+
+    return {
+      ...tokens,
+      user,
+    };
+  }
+
+  async refresh(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.BadRequestError();
+    }
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    if (!userData) {
+      throw ApiError.BadRequestError();
+    }
+
+    const user = await UserModel.findOne({
+      where: {
+        username: userData.dataValues.username,
+      },
+    });
 
     const tokens = tokenService.generateToken({ ...user });
 
