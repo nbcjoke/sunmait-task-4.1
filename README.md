@@ -18,9 +18,12 @@ Install all dependecies using the command `npm i`.
 ## Second
 
 Also u need to create file called `.env`.
-After u will create this file, u need to fill file with this lines
+After u will create this file, u need to fill file with this lines:
 
-`PORT = 5000 <br /> CLIENT_URL = 'http://localhost:3000' <br /> JWT_ACCESS_SECRET = 'jwt-secret-key' <br /> JWT_REFRESH_SECRET = 'jwt-refresh-secret-key'`
+PORT = 5000
+CLIENT_URL = 'http://localhost:3000'
+JWT_ACCESS_SECRET = 'jwt-secret-key'
+JWT_REFRESH_SECRET = 'jwt-refresh-secret-key'`
 
 ## Third
 
